@@ -13,6 +13,6 @@
 
 - name: Test out human readable
   set_fact:
-    actual_bytes: '{{ initial_size | human_to_bytes }}'
+    actual_bytes: '{{ initial_size | regex_replace("GiB", "GB") | human_to_bytes }}'
 
 - fail:
