@@ -7,15 +7,8 @@
   set_fact:
     '{{ size_var_name }}': '{{ get_size }}'
     '{{ object_var_name }}': '{{ objects.split() [-1] }}'
-    #'{{ byte_var_name }}': '{{ get_size | rege'
+    '{{ byte_var_name }}': '{{ get_size | regex_replace("i") | human_to_bytes }}'
   vars:
     objects: '{{ s3_ls_info.stdout_lines | select ("contains", "Total Objects:") | list | first }}'
     size: '{{ s3_ls_info.stdout_lines | select ("contains", "Total Size:") | list | first }}'
     get_size: '{{ size.split() [-2] }} {{ size.split() [-1] }}'
-
-
-- name: Test out human readable
-  set_fact:
-    actual_bytes: '{{ initial_size | regex_replace("i") | human_to_bytes }}'
-
-- fail:

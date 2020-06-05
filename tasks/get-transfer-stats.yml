@@ -1,0 +1,10 @@
+---
+- name: Set fact for stats
+  set_fact:
+    objects_transferred: '{{ final_object_count | int - initial_object_count | int }}'
+    bytes_transferred: '{{ final_byte | int - initial_byte | int }}'
+
+- debug:
+    msg: |
+      Number of bytes transferred: {{ bytes_transferred | human_readable }}
+      Number of objects transferred: {{ objects_transferred }}
