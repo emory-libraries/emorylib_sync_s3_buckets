@@ -12,7 +12,8 @@
     size: '{{ s3_ls_info.stdout_lines | select ("contains", "Total Size:") | list | first }}'
 
 - debug:
-    var: size_var_name
+    msg: '{{ lookup("vars", "size_var_name" }}'
+
 #- name: Set fact for bytes:
 
 #- name: Test out human readable
