@@ -6,5 +6,8 @@
 
 - debug:
     msg: |
-      Number of bytes transferred: {{ bytes_transferred | human_readable }}
+      Number of bytes transferred: {{ min_byte }}
       Number of objects transferred: {{ objects_transferred }}
+    vars:
+      min_byte: '{{ bytes_transferred != "0" | ternary (get_byte, "0 Bytes") }}'
+      get_byte: '{{ bytes_transferred | human_readable | d () }}'
