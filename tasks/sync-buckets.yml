@@ -3,6 +3,11 @@
   shell: 'time aws s3 sync s3://{{ source_s3.bucket }}/{{ source_s3.key_prefix | d () }} s3://{{ dest_s3.bucket }}/{{ dest_s3.key_prefix | d () }}'
   register: s3_sync_info
 
+- debug:
+    var: s3_sync_info
+   
+- pause:
+
 - name: Set fact for transfer time
   set_fact:
     upload_time: '{{ real.split() [-1] }}'
